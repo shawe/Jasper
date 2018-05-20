@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 7.1.0.final using JasperReports Library version 6.4.3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="LinesSalesDocument" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="81723011-272e-493d-a3d4-f86e73046d02">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="PostgreSQL"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="403"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w2" value="583"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#A9A9A9">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#E6E6E6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()%2==0)]]></conditionExpression>
+			<style backcolor="#E9E9E9"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="LinesDataset" uuid="929eb672-ef1c-4d4a-a189-967d3542a476">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="PostgreSQL"/>
+		<parameter name="linesDocSQL" class="java.lang.String">
+			<defaultValueExpression><![CDATA[$P{linesDocSQL}]]></defaultValueExpression>
+		</parameter>
+		<parameter name="linesTableName" class="java.lang.String">
+			<defaultValueExpression><![CDATA[$P{linesTableName}]]></defaultValueExpression>
+		</parameter>
+		<parameter name="primaryName" class="java.lang.String">
+			<defaultValueExpression><![CDATA[$P{primaryName}]]></defaultValueExpression>
+		</parameter>
+		<parameter name="primaryKey" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[$P{primaryKey}]]></defaultValueExpression>
+		</parameter>
+		<queryString language="SQL">
+			<![CDATA[SELECT $P!{linesDocSQL} FROM $P!{linesTableName} WHERE $P!{primaryName} = $P{primaryKey}]]>
+		</queryString>
+		<field name="cantidad" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="cantidad"/>
+		</field>
+		<field name="codcombinacion" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="codcombinacion"/>
+		</field>
+		<field name="codimpuesto" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="codimpuesto"/>
+		</field>
+		<field name="descripcion" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="descripcion"/>
+		</field>
+		<field name="dtopor" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="dtopor"/>
+		</field>
+		<field name="idlinea" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.label" value="idlinea"/>
+		</field>
+		<field name="irpf" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="irpf"/>
+		</field>
+		<field name="iva" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="iva"/>
+		</field>
+		<field name="mostrar_cantidad" class="java.lang.Boolean">
+			<property name="com.jaspersoft.studio.field.label" value="mostrar_cantidad"/>
+		</field>
+		<field name="mostrar_precio" class="java.lang.Boolean">
+			<property name="com.jaspersoft.studio.field.label" value="mostrar_precio"/>
+		</field>
+		<field name="orden" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.label" value="orden"/>
+		</field>
+		<field name="pvpsindto" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="pvpsindto"/>
+		</field>
+		<field name="pvptotal" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="pvptotal"/>
+		</field>
+		<field name="pvpunitario" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="pvpunitario"/>
+		</field>
+		<field name="recargo" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.label" value="recargo"/>
+		</field>
+		<field name="referencia" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="referencia"/>
+		</field>
+		<field name="iddoc" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.label" value="iddoc"/>
+		</field>
+		<field name="iddocprev" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.label" value="iddocprev"/>
+		</field>
+		<field name="idlineadocprev" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.label" value="idlineadocprev"/>
+		</field>
+	</subDataset>
+	<parameter name="linesDocSQL" class="java.lang.String" evaluationTime="Early">
+		<defaultValueExpression><![CDATA[$P{linesDocSQL}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="linesTableName" class="java.lang.String" evaluationTime="Early">
+		<defaultValueExpression><![CDATA[$P{linesTableName}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="primaryName" class="java.lang.String" evaluationTime="Early">
+		<defaultValueExpression><![CDATA[$P{primaryName}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="primaryKey" class="java.lang.Integer" evaluationTime="Early">
+		<defaultValueExpression><![CDATA[$P{primaryKey}]]></defaultValueExpression>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[SELECT $P!{linesDocSQL} FROM $P!{linesTableName} WHERE $P!{primaryName} = $P{primaryKey}]]>
+	</queryString>
+	<field name="cantidad" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="cantidad"/>
+	</field>
+	<field name="codcombinacion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="codcombinacion"/>
+	</field>
+	<field name="codimpuesto" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="codimpuesto"/>
+	</field>
+	<field name="descripcion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="descripcion"/>
+	</field>
+	<field name="dtopor" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="dtopor"/>
+	</field>
+	<field name="idlinea" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="idlinea"/>
+	</field>
+	<field name="irpf" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="irpf"/>
+	</field>
+	<field name="iva" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="iva"/>
+	</field>
+	<field name="mostrar_cantidad" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.label" value="mostrar_cantidad"/>
+	</field>
+	<field name="mostrar_precio" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.label" value="mostrar_precio"/>
+	</field>
+	<field name="orden" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="orden"/>
+	</field>
+	<field name="pvpsindto" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="pvpsindto"/>
+	</field>
+	<field name="pvptotal" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="pvptotal"/>
+	</field>
+	<field name="pvpunitario" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="pvpunitario"/>
+	</field>
+	<field name="recargo" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="recargo"/>
+	</field>
+	<field name="referencia" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="referencia"/>
+	</field>
+	<field name="iddoc" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="iddoc"/>
+	</field>
+	<field name="iddocprev" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="iddocprev"/>
+	</field>
+	<field name="idlineadocprev" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="idlineadocprev"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="25" splitType="Stretch">
+			<componentElement>
+				<reportElement x="0" y="-20" width="555" height="45" uuid="c711b3b4-5399-4c26-aecb-ef4e006240d2">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+					<property name="net.sf.jasperreports.export.headertoolbar.table.name" value=""/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
+					<datasetRun subDataset="LinesDataset" uuid="7402cede-bf40-4b9f-a060-da116b527764">
+						<datasetParameter name="linesTableName">
+							<datasetParameterExpression><![CDATA[$P{linesTableName}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="primaryName">
+							<datasetParameterExpression><![CDATA[$P{primaryName}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="primaryKey">
+							<datasetParameterExpression><![CDATA[$P{primaryKey}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="linesDocSQL">
+							<datasetParameterExpression><![CDATA[$P{linesDocSQL}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="90" uuid="bb022bcb-8656-4820-8a5b-7fc7ebbc5760">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+						<jr:columnHeader style="Table_CH" height="25">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="25" uuid="4d30aa3a-d94a-48e1-8636-e077db7197fc">
+									<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+									<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+								</reportElement>
+								<textElement verticalAlignment="Middle">
+									<font isBold="true"/>
+									<paragraph leftIndent="5" rightIndent="5"/>
+								</textElement>
+								<text><![CDATA[Referencia]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="20">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<textField isBlankWhenNull="true">
+								<reportElement isPrintRepeatedValues="false" x="0" y="0" width="90" height="20" uuid="45b0d199-ab1d-49e5-935f-892516f209ce">
+									<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+									<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+								</reportElement>
+								<textElement verticalAlignment="Middle">
+									<font size="8"/>
+									<paragraph leftIndent="5" rightIndent="5"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{referencia}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="214" uuid="c4442a63-393b-474b-826f-b93ee7c7a3d2">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+						<jr:columnHeader style="Table_CH" height="25">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<staticText>
+								<reportElement x="0" y="0" width="214" height="25" uuid="29f97ddd-b73e-40ed-8c7b-1956a0c7d2eb">
+									<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+									<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+								</reportElement>
+								<textElement textAlignment="Left" verticalAlignment="Middle">
+									<font isBold="true"/>
+									<paragraph leftIndent="5" rightIndent="5"/>
+								</textElement>
+								<text><![CDATA[Descripción]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="20">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement isPrintRepeatedValues="false" x="0" y="0" width="214" height="20" isPrintWhenDetailOverflows="true" uuid="6322fe4c-85a4-4830-97e3-be0aadc7494a">
+									<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+									<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+									<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
+									<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
+								</reportElement>
+								<textElement verticalAlignment="Middle">
+									<font size="8"/>
+									<paragraph firstLineIndent="2" leftIndent="5" rightIndent="5" spacingBefore="2"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="81a2ccae-5264-4718-bd39-1e120cb91aaf">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+						<jr:columnHeader style="Table_CH" height="25">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<staticText>
+								<reportElement x="0" y="0" width="50" height="25" uuid="22ff32b5-5211-41f6-9820-68b6bfa4c36d">
+									<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+									<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+								</reportElement>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+									<paragraph leftIndent="0" rightIndent="0"/>
+								</textElement>
+								<text><![CDATA[Cant.]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="20">
+							<textField isBlankWhenNull="true">
+								<reportElement isPrintRepeatedValues="false" x="0" y="0" width="50" height="20" uuid="87aa2f4f-1ca4-444e-b5d0-821c5229363b">
+									<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+									<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+								</reportElement>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font size="8"/>
+									<paragraph leftIndent="5" rightIndent="5"/>
+								</textElement>
+								<textFieldExpression><![CDATA[new BigDecimal($F{cantidad}).setScale(2, BigDecimal.ROUND_HALF_UP)]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="5cbb108b-514a-4fce-89c0-166d9b173e08">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+						<jr:columnHeader style="Table_CH" height="25">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<staticText>
+								<reportElement x="0" y="0" width="50" height="25" uuid="fb9bcfe6-2735-4d8d-9ef7-5b474db87ecb">
+									<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+									<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+								</reportElement>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+									<paragraph leftIndent="0" rightIndent="0"/>
+								</textElement>
+								<text><![CDATA[PVP]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="20">
+							<textField isBlankWhenNull="true">
+								<reportElement isPrintRepeatedValues="false" x="0" y="0" width="50" height="20" uuid="3d6fe6f1-cd38-4a13-99c8-ae9f7a4cc686">
+									<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+									<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+								</reportElement>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font size="8"/>
+									<paragraph leftIndent="5" rightIndent="5"/>
+								</textElement>
+								<textFieldExpression><![CDATA[new BigDecimal($F{pvpunitario}).setScale(2, BigDecimal.ROUND_HALF_UP)]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="ebe8a05e-811e-43bc-9fc7-d815bed68cbd">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+						<jr:columnHeader style="Table_CH" height="25">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<staticText>
+								<reportElement x="0" y="0" width="50" height="25" uuid="ae7cb285-c88d-4595-902c-8fa8ce9addc1">
+									<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+									<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+								</reportElement>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+									<paragraph leftIndent="0" rightIndent="0"/>
+								</textElement>
+								<text><![CDATA[Dto. %]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="20">
+							<textField isBlankWhenNull="true">
+								<reportElement isPrintRepeatedValues="false" x="0" y="0" width="50" height="20" uuid="085b8da5-47d0-42dd-9bdc-70d886c66944">
+									<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+									<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+								</reportElement>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font size="8"/>
+									<paragraph leftIndent="5" rightIndent="5"/>
+								</textElement>
+								<textFieldExpression><![CDATA[new BigDecimal($F{dtopor}).setScale(2, BigDecimal.ROUND_HALF_UP)]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="24fc76a7-58ed-4d1e-9cbb-4eaa4337fe71">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
+						<jr:columnHeader style="Table_CH" height="25">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<staticText>
+								<reportElement x="0" y="0" width="50" height="25" uuid="734193d8-9cb5-40c3-8128-5a5382048d94"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[% Imp.]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="20">
+							<textField isBlankWhenNull="true">
+								<reportElement isPrintRepeatedValues="false" x="0" y="0" width="50" height="20" uuid="16b0b6ec-c6fa-4e9f-86b0-ab31403fa7a9">
+									<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+									<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+								</reportElement>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font size="8"/>
+									<paragraph leftIndent="5" rightIndent="5"/>
+								</textElement>
+								<textFieldExpression><![CDATA[new BigDecimal($F{iva}).setScale(2, BigDecimal.ROUND_HALF_UP)]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="351236d5-9287-4f6c-afa7-a21bf4e05a2a">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column7"/>
+						<jr:columnHeader style="Table_CH" height="25">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<staticText>
+								<reportElement x="0" y="0" width="50" height="25" uuid="5a46262b-5c35-47ac-98bb-279bfe4703ff"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Precio]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="20">
+							<textField isBlankWhenNull="true">
+								<reportElement isPrintRepeatedValues="false" x="0" y="0" width="50" height="20" uuid="c26d6e9e-e82e-42d6-b5a8-c5f814f188df">
+									<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+									<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+								</reportElement>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font size="8"/>
+									<paragraph leftIndent="5" rightIndent="5"/>
+								</textElement>
+								<textFieldExpression><![CDATA[new BigDecimal($F{pvptotal}).setScale(2, BigDecimal.ROUND_HALF_UP)]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</title>
+</jasperReport>

@@ -1,0 +1,267 @@
+{#
+   /**
+     * JasperReportsConfig view template.
+     *
+     * Annual accounts and accounting reports.
+     *
+     * This file is part of Jasper
+     * Copyright (C) 2018 Francesc Pineda Segarra <francesc.pineda.segarra@gmail.com>
+     *
+     * This program is free software: you can redistribute it and/or modify
+     * it under the terms of the GNU Lesser General Public License as
+     * published by the Free Software Foundation, either version 3 of the
+     * License, or (at your option) any later version.
+     *
+     * This program is distributed in the hope that it will be useful,
+     * but WITHOUT ANY WARRANTY; without even the implied warranty of
+     * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+     * GNU Lesser General Public License for more details.
+     *
+     * You should have received a copy of the GNU Lesser General Public License
+     * along with this program. If not, see <http://www.gnu.org/licenses/>.
+     *
+    */
+#}
+
+{% extends "Master/MenuTemplate.html.twig" %}
+
+{% block body %}
+    {# -- Calculate texts according to language -- #}
+    {% set refresh = i18n.trans('refresh-page') %}
+    {% set title = i18n.trans(fsc.getPageData()['title']) %}
+
+    {# -- Others Values -- #}
+    {% set exportOptions = fsc.exportManager.options() %}
+
+    {# -- Visual macros -- #}
+    {% from 'Macro/Utils.html.twig' import popoverTitle as popoverTitle %}
+
+    {# -- Main Body -- #}
+    <div class="container-fluid d-print-none">
+        {{ parent() }}
+
+        {# -- Header Row -- #}
+        <div class="row">
+            <div class="col-sm-7 col-6">
+                <div class="btn-group d-xs-none">
+                    <a class="btn btn-sm btn-outline-secondary" href="{{ fsc.url() }}" {{ popoverTitle(refresh, 'bottom') }}>
+                        <i class="fa fa-refresh" aria-hidden="true"></i>
+                    </a>
+                    {% if fsc.getPageData()['name'] == fsc.user.homepage %}
+                        <a class="btn btn-sm btn-outline-secondary active" href="{{ fsc.url() }}?defaultPage=FALSE" {{ popoverTitle(defaultF, 'bottom') }}>
+                            <i class="fa fa-bookmark" aria-hidden="true"></i>
+                        </a>
+                    {% else %}
+                        <a class="btn btn-sm btn-outline-secondary" href="{{ fsc.url() }}?defaultPage=TRUE" {{ popoverTitle(defaultT, 'bottom') }}>
+                            <i class="fa fa-bookmark-o" aria-hidden="true"></i>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="col-sm-5 col-6 text-right">
+                <h1 style="margin-top: 0; margin-bottom: 0;">
+                    <i class="fa {{ fsc.getPageData()['icon'] }}" aria-hidden="true"></i> {{ title }}
+                </h1>
+            </div>
+        </div>
+
+        {# -- Data Row -- #}
+        <div class="row" style="margin-top: 15px;">
+            <div class="container-fluid d-print-none" style="margin-top: 15px; margin-bottom: 10px;">
+                {% set details = i18n.trans('details') %}
+                {% set moreInfo = i18n.trans('more-info') %}
+                <ul class="nav nav-tabs d-print-none" id="mainTabs" role="tablist">
+                    <li class="nav-item" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="{{ details }}" data-original-title="" title="">
+                        <a href="#Details" class="nav-link active" data-toggle="tab" role="tab" aria-controls="{{ details }}">
+                            <i class="fa fa-info-circle" aria-hidden="true"></i>
+                            <span class="d-none d-sm-inline-block">
+                                &nbsp;{{ details }}
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="{{ moreInfo }}" data-original-title="" title="">
+                        <a href="#MoreInfo" class="nav-link " data-toggle="tab" role="tab" aria-controls="{{ moreInfo }}">
+                            <i class="fa fa-question-circle" aria-hidden="true"></i>
+                            <span class="d-none d-sm-inline-block">
+                                &nbsp;{{ moreInfo }}
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="tab-content" id="mainTabsContent">
+                    <div class="tab-pane active" id="Details" role="tabpanel">
+                        <div class="container-fluid d-print-none" style="margin-top: 15px; margin-bottom: 10px;">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h3>
+                                        <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                                        {{ i18n.trans('available-reports') }}
+                                    </h3>
+                                    <ul class="list-group">
+                                        {% for report in fsc.reports %}
+                                            <li class="list-group-item">
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        {{ report }}
+                                                    </div>
+                                                    <div class="col-6 text-right">
+                                                        <a href="{{ fsc.url ~ '?action=delete&file=' ~ report }}" class="btn btn-sm btn-danger">
+                                                            <i class="fa fa-times" aria-hidden="true"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        {% else %}
+                                            <li class="list-group-item">
+                                                {{ i18n.trans('no-reports-available') }}
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group col-md-12">
+                                        <form name="AttachedFiles" action="{{ fsc.url() }}" method="post" enctype="multipart/form-data" class="form" role="form">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <h3>
+                                                        <i class="fa fa-upload" aria-hidden="true"></i>
+                                                        {{ i18n.trans('upload-file') }}
+                                                    </h3>
+                                                    <small class="form-text text-muted">
+                                                        {{ i18n.trans('upload-file-help') }}
+                                                    </small>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <label for="path">
+                                                        {{ i18n.trans('attach-any-needed-file') }}
+                                                    </label>
+                                                    <input type="file" name="attached" class="form-control-file" required="">
+                                                    <input type="hidden" name="action" value="upload">
+                                                    <small class="form-text text-muted">
+                                                        {{ i18n.trans('help-server-accepts-filesize', {'%size%': fsc.getMaxFileUpload()}) }}
+                                                    </small>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 text-right">
+                                                    <button class="btn btn-sm btn-primary" id="submit-AttachedFiles" type="submit" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="{{ i18n.trans('save-data') }}" data-original-title="" title="">
+                                                        <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                                                        &nbsp; {{ i18n.trans('save') }}
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane " id="MoreInfo" role="tabpanel">
+                        <div class="container-fluid d-print-none" style="margin-top: 15px; margin-bottom: 10px;">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    {{ i18n.trans('basic-info', {'%link%': '<a target="_blank" href="https://github.com/cossou/JasperPHP">JasperPHP</a>'})|raw }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container-fluid d-print-none" style="margin-top: 25px; margin-bottom: 25px;">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            {% set OS = fsc.getIconOS() %}
+                                            <i class="fa fa-{{ OS }} fa-6" aria-hidden="true"></i>
+                                            {% if OS == 'apple' %}
+                                                {{ i18n.trans('osx') }}
+                                            {% elseif OS == 'windows' %}
+                                                {{ i18n.trans('windows') }}
+                                            {% elseif OS == 'linux' %}
+                                                {{ i18n.trans('linux') }}
+                                            {% else %}
+                                                {{ i18n.trans('unknow') }}
+                                            {% endif %}
+                                        </li>
+                                        <li class="list-group-item">
+                                            {% if fsc.isExecutable() %}
+                                                <i class="fa fa-check text-success" aria-hidden="true"></i>
+                                                {{ i18n.trans('is-executable') }}
+                                            {% else %}
+                                                <i class="fa fa-times text-danger" aria-hidden="true"></i>
+                                                {{ i18n.trans('is-not-executable', {'%fileName%': fsc.getBinaryPath()}) }}
+                                            {% endif %}
+                                        </li>
+                                        <li class="list-group-item">
+                                            {% set JAVA = fsc.isJavaInstalled() %}
+                                            {% if JAVA == 1 %}
+                                                <i class="fa fa-check text-success" aria-hidden="true"></i>
+                                                {{ i18n.trans('java-installed') }}
+                                            {% elseif JAVA == 0 %}
+                                                <i class="fa fa-times text-danger" aria-hidden="true"></i>
+                                                {{ i18n.trans('java-not-installed') }}
+                                            {% else %}
+                                                <i class="fa fa-question-circle text-warning" aria-hidden="true"></i>
+                                                {{ i18n.trans('java-status-unknow') }}
+                                            {% endif %}
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6 text-center">
+                                    <h3>
+                                        <i class="fa fa-paint-brush" aria-hidden="true"></i>
+                                        {{ i18n.trans('design-yourself') }}
+                                    </h3>
+
+                                    <p class="text-justify">
+                                        {{ i18n.trans('design-yourself-description')|raw }}
+                                    </p>
+
+                                    <a href="https://community.jaspersoft.com/project/jaspersoft-studio/releases" target="_blank" class="btn btn-primary">
+                                        <i class="fa fa-download" aria-hidden="true"></i>&nbsp; JasperSoft Studio
+                                    </a>
+
+                                    <a href="https://dev.mysql.com/downloads/connector/j/" target="_blank" class="btn btn-primary">
+                                        <i class="fa fa-download" aria-hidden="true"></i>&nbsp; MySQL Connector/J
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container-fluid d-print-none" style="margin-top: 25px; margin-bottom: 25px;">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h3>
+                                        <i class="fa fa-question-circle" aria-hidden="true"></i>
+                                        {{ i18n.trans('need-help-with-jaspersoft') }}
+                                    </h3>
+                                    <ul class="list-group text-center">
+                                        <li class="list-group-item">
+                                            <a target="_blank" href="https://www.youtube.com/playlist?list=PL-xL_Z8tWXEq4W-LIDgT9qpVuANltSJLe">
+                                                Tutorial de JasperReports y Jaspersoft Studio
+                                            </a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <a target="_blank" href="https://www.youtube.com/playlist?list=PL5NudtWaQ9l4LEzDAU-DdBQAp21lLH00r">
+                                                Jaspersoft Tutorials
+                                            </a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <a target="_blank" href="https://docs.tibco.com/pub/js-jrs/6.3.4/doc/pdf/Jaspersoft-Studio-User-Guide.pdf">
+                                                TIBCO JasperSoft Studio User Guide (Release 6.3)
+                                            </a>
+
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

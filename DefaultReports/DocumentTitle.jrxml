@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 7.1.0.final using JasperReports Library version 6.4.3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DocumentTitle" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3ae3819c-ea22-4543-9dc9-b8f9677f812d">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="PostgreSQL"/>
+	<parameter name="idEmpresa" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[new Integer(1)]]></defaultValueExpression>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[SELECT * FROM empresas WHERE idempresa = $P{idEmpresa}]]>
+	</queryString>
+	<field name="administrador" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="administrador"/>
+	</field>
+	<field name="apartado" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="apartado"/>
+	</field>
+	<field name="cifnif" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="cifnif"/>
+	</field>
+	<field name="ciudad" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ciudad"/>
+	</field>
+	<field name="codpais" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="codpais"/>
+	</field>
+	<field name="codpostal" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="codpostal"/>
+	</field>
+	<field name="direccion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="direccion"/>
+	</field>
+	<field name="email" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="email"/>
+	</field>
+	<field name="fax" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="fax"/>
+	</field>
+	<field name="idempresa" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="idempresa"/>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nombre"/>
+	</field>
+	<field name="nombrecorto" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nombrecorto"/>
+	</field>
+	<field name="provincia" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="provincia"/>
+	</field>
+	<field name="personafisica" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.label" value="personafisica"/>
+	</field>
+	<field name="recequivalencia" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.label" value="recequivalencia"/>
+	</field>
+	<field name="telefono1" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="telefono1"/>
+	</field>
+	<field name="telefono2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="telefono2"/>
+	</field>
+	<field name="web" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="web"/>
+	</field>
+	<field name="fechaalta" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="fechaalta"/>
+	</field>
+	<field name="observaciones" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="observaciones"/>
+	</field>
+	<field name="regimeniva" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="regimeniva"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="80" splitType="Stretch">
+			<image hAlign="Center">
+				<reportElement x="0" y="0" width="80" height="80" uuid="6fc94b2b-590d-4d5e-81f0-210ab2fdcb3d"/>
+				<imageExpression><![CDATA["logo.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="80" y="0" width="285" height="25" uuid="881883cf-aad2-44b6-bac5-5b0d7e40b565"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="25" width="285" height="15" uuid="f4054cf7-40f6-4345-8886-171da28843e2"/>
+				<textFieldExpression><![CDATA[$F{direccion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="80" y="55" width="100" height="15" uuid="87e3bfae-1a18-40f9-ab40-164c53a39a49"/>
+				<textFieldExpression><![CDATA[$F{telefono1}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="80" y="40" width="100" height="15" uuid="6fdd3266-2b16-4dd0-83a2-c4c03db70e76"/>
+				<textFieldExpression><![CDATA[$F{codpostal}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="180" y="40" width="185" height="15" uuid="300f6a19-2527-4f21-9b57-9ded77cb83a6"/>
+				<textFieldExpression><![CDATA[$F{provincia}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="180" y="55" width="185" height="15" uuid="78094122-0e0e-40ee-bbbf-698ff49e48fa"/>
+				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+</jasperReport>

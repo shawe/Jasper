@@ -1,0 +1,1 @@
+Añade soporte para utilizar plantillas de JasperReports desde FacturaScripts 2018 para poder generar archivos CSV, DOCX, JRPRINT, ODS, ODT, PDF, PPTX, RTF, XLS, XLSX y XML a partir de archivos .jrxml.
